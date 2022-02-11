@@ -1,0 +1,32 @@
+exercise2:
+
+    DELETE users,addresses
+    FROM users 
+    INNER JOIN addresses ON users.address_id = addresses.id 
+WHERE
+    addresses.ort = 'Frankfurt';
+
+
+    CREATE TABLE rooms (
+    room_no INT PRIMARY KEY AUTO_INCREMENT,
+    room_name VARCHAR(255) NOT NULL,
+    building_no INT NOT NULL,
+    FOREIGN KEY (building_no)
+        REFERENCES buildings (building_no)
+        ON DELETE CASCADE
+    );
+
+exercise3:
+    error_reporting(-1);
+    ini_set('display_errors', 'On');
+
+
+    -Public
+    -js
+    -css
+    -src:
+        -Models
+        -Controllers
+    -Views
+    -Uploads
+    -Api
