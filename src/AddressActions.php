@@ -25,15 +25,16 @@ class AddressActions
         $postleitzahl = $this->address->postleitzahl;
         $ort = $this->address->ort;
 
-        $sql = "INSERT INTO addresses (strasse, hausnummer, postleitzahl, ort) 
-            VALUES ('$strasse', '$hausnummer', '$postleitzahl', '$ort')";
-        
-        if (mysqli_query($conn, $sql)) {
-            $last_id = mysqli_insert_id($conn);
+        $sql = "INSERT INTO addressesS (strasse, hausnummer, postleitzahl, ort) 
+            VALUES (?, ?, ?, ?)";
+        $type = "ssss";
+        $rows = [$strasse, $hausnummer, $postleitzahl, $ort];
+
+        try {
+            $last_id = $dbConnection->insertToDB($sql, $type, $rows);
             return $last_id;
-        } else {
+        } catch (\Throwable $th) {
             throw new Exception("Error occurred while adding address", 1);
-            
         }
     }
 }

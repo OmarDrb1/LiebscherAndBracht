@@ -17,9 +17,19 @@ Class DbConnection{
         return self::$instance;
     }
 
-    function getConnection(){
+    public function getConnection(){
         
         return $this->connection;
+    }
+
+    public function insertToDB(String $sql, String $types, Array $row)
+    {
+        $stmt = $this->connection->prepare($sql);
+        $stmt -> bind_param($types, ...$row);
+        $stmt -> execute();
+
+        $last_id = mysqli_insert_id($this->connection);
+        return $last_id;
     }
 }
 // $dbConnection = DbConnection::getInstance();

@@ -20,7 +20,7 @@ class UserActions
 
     public function addToDB(DbConnection $dbConnection)
     {
-        $conn = $dbConnection->getConnection();
+        // $conn = $dbConnection->getConnection();
 
         $vorname = $this->user->vorname;
         $nachname = $this->user->nachname;
@@ -36,14 +36,15 @@ class UserActions
             $addressId = null;
 
         $sql = "INSERT INTO users (vorname, nachname, email, telefon, beschreibung, address_id, add_date) 
-            VALUES ('$vorname', '$nachname', '$email', '$telefon', '$beschreibung', '$addressId', NOW())";
+            VALUES (?, ?, ?, ?, ?, ?, NOW())";
+        $type = "sssssi";
+        $rows = [$vorname, $nachname, $email, $telefon, $beschreibung, $addressId];
 
-        if (mysqli_query($conn, $sql)) {
-            $last_id = mysqli_insert_id($conn);
+        try {
+            $last_id = $dbConnection->insertToDB($sql, $type, $rows);
             return $last_id;
-        } else {
+        } catch (\Throwable $th) {
             throw new Exception("Error occurred while adding user", 1);
-            
         }
     }
 }
