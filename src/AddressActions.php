@@ -23,7 +23,7 @@ class AddressActions
         $postleitzahl = $this->address->postleitzahl;
         $ort = $this->address->ort;
 
-        $sql = "INSERT INTO addressesS (strasse, hausnummer, postleitzahl, ort) 
+        $sql = "INSERT INTO addresses (strasse, hausnummer, postleitzahl, ort) 
             VALUES (?, ?, ?, ?)";
         $type = "ssss";
         $rows = [$strasse, $hausnummer, $postleitzahl, $ort];
