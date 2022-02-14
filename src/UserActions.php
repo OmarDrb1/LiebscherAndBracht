@@ -20,8 +20,6 @@ class UserActions
 
     public function addToDB(DbConnection $dbConnection)
     {
-        // $conn = $dbConnection->getConnection();
-
         $vorname = $this->user->vorname;
         $nachname = $this->user->nachname;
         $email = $this->user->email;

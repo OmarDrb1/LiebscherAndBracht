@@ -18,8 +18,6 @@ class AddressActions
 
     public function addToDB(DbConnection $dbConnection)
     {
-        $conn = $dbConnection->getConnection();
-
         $strasse = $this->address->strasse;
         $hausnummer = $this->address->hausnummer;
         $postleitzahl = $this->address->postleitzahl;
